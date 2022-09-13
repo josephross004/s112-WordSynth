@@ -997,6 +997,7 @@ def playsound(sound_number=0):
         ipa_ɛr = numpy.r_[550,1550,1900]
         ipa_ɑ = numpy.r_[750,940]
         ipa_s = numpy.r_[250,500]
+        ipa_o = numpy.r_[430,880]
         if 0:  # linear transition
             xfade = numpy.linspace(1, 0, N)
         else:  # exponential transition
@@ -1082,6 +1083,11 @@ def playsound(sound_number=0):
             s.parameters["AF"] = 100
             s.run()
             s.play()
+        elif sound_number==16:
+            FF[:,:2] = ipa_o
+            s.parameters["FF"] = FF.T
+            s.run()
+            s.play()
         time.sleep(0.75)
 #XXX: def __init__(self, FS=10000, N_FORM=5, DUR=1, F0=100, FF=[500, 1500, 2500, 3500, 4500], BW=[50, 100, 100, 200, 250], AV=60, AQSV=0, AA=0, AF=0,
                        #CS=0, FGR1=0, BGR1=100, FGZ=1500, BGZ=6000, FNP=250, BNP=100, FNZ=250, BNZ=100, BGR2=200, PF1=0, PF2=0, PF3=0, PF4=0, PF5=0, PF6=0, NF=0):
@@ -1119,6 +1125,8 @@ if __name__ == '__main__':
     ɑ.place(x=25, y=100)
     s=tk.Button(window, text="s", fg='blue', command=lambda: playsound(15))
     s.place(x=25, y=150)
+    o=tk.Button(window, text="o", fg='blue', command=lambda: playsound(16))
+    o.place(x=235, y=100)
     window.title('Phonemes')
     window.geometry("300x200+10+20")
     window.mainloop()
