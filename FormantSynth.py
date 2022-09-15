@@ -994,7 +994,7 @@ def playsound(sound_number=0):
         ipa_ɔ = numpy.r_[500,700,700]
         ipa_ə = numpy.r_[500,1500,2500]
         ipa_n = numpy.r_[300]
-        ipa_m = numpy.r_[200,0,0]
+        ipa_m = numpy.r_[200]
         ipa_ɛr = numpy.r_[550,1550,1900]
         ipa_ɑ = numpy.r_[750,940,940]
         ipa_s = numpy.r_[2000,4500,7000]
@@ -1063,7 +1063,7 @@ def playsound(sound_number=0):
             s.run()
             s.play()
         elif sound_number==11:
-            FF[:,:3] = ipa_m
+            FF[:,:1] = ipa_m
             s.parameters["FF"] = FF.T
             s.parameters["NF"] = 20
             s.run()
@@ -1130,42 +1130,42 @@ if __name__ == '__main__':
     #t = numpy.arange(len(s.out)) / s.parameters['FS']
     window=tk.Tk()
     # add widgets here
-    ee=tk.Button(window, text="i", fg='blue', command=lambda: playsound(1))
+    ee=tk.Button(window, text="i", fg='red', command=lambda: playsound(1))
     ee.place(x=85, y=100)
-    oo=tk.Button(window, text="u", fg='blue', command=lambda: playsound(2))
+    oo=tk.Button(window, text="u", fg='red', command=lambda: playsound(2))
     oo.place(x=100, y=100)
-    ʌ=tk.Button(window, text="ʌ", fg='blue', command=lambda: playsound(3))
+    ʌ=tk.Button(window, text="ʌ", fg='red', command=lambda: playsound(3))
     ʌ.place(x=120, y=100)
-    æ=tk.Button(window, text="æ", fg='blue', command=lambda: playsound(4))
+    æ=tk.Button(window, text="æ", fg='red', command=lambda: playsound(4))
     æ.place(x=138, y=100)
-    ɛ=tk.Button(window, text="ɛ", fg='blue', command=lambda: playsound(5))
+    ɛ=tk.Button(window, text="ɛ", fg='red', command=lambda: playsound(5))
     ɛ.place(x=160, y=100)
-    ɪ=tk.Button(window, text="ɪ", fg='blue', command=lambda: playsound(6))
+    ɪ=tk.Button(window, text="ɪ", fg='red', command=lambda: playsound(6))
     ɪ.place(x=180, y=100)
-    ɒ=tk.Button(window, text="ɒ", fg='blue', command=lambda: playsound(7))
+    ɒ=tk.Button(window, text="ɒ", fg='red', command=lambda: playsound(7))
     ɒ.place(x=195, y=100)
-    ʊ=tk.Button(window, text="ʊ", fg='blue', command=lambda: playsound(8))
+    ʊ=tk.Button(window, text="ʊ", fg='red', command=lambda: playsound(8))
     ʊ.place(x=215, y=100)
-    ə=tk.Button(window, text="ə", fg='blue', command=lambda: playsound(9))
+    ə=tk.Button(window, text="ə", fg='red', command=lambda: playsound(9))
     ə.place(x=65, y=100)
-    n=tk.Button(window, text="n", fg='blue', command=lambda: playsound(10))
+    n=tk.Button(window, text="n", fg='purple', command=lambda: playsound(10))
     n.place(x=65, y=150)
-    m=tk.Button(window, text="m", fg='blue', command=lambda: playsound(11))
+    m=tk.Button(window, text="m", fg='purple', command=lambda: playsound(11))
     m.place(x=85, y=150)
-    ɛr=tk.Button(window, text="ɛr", fg='blue', command=lambda: playsound(12))
+    ɛr=tk.Button(window, text="ɛr", fg='orange', command=lambda: playsound(12))
     ɛr.place(x=110, y=150)
-    ɔ=tk.Button(window, text="ɔ", fg='blue', command=lambda: playsound(13))
+    ɔ=tk.Button(window, text="ɔ", fg='red', command=lambda: playsound(13))
     ɔ.place(x=45, y=100)
-    ɑ=tk.Button(window, text="ɑ", fg='blue', command=lambda: playsound(14))
+    ɑ=tk.Button(window, text="ɑ", fg='red', command=lambda: playsound(14))
     ɑ.place(x=25, y=100)
-    s=tk.Button(window, text="s", fg='blue', command=lambda: playsound(15))
+    s=tk.Button(window, text="s", fg='green', command=lambda: playsound(15))
     s.place(x=25, y=150)
-    o=tk.Button(window, text="o", fg='blue', command=lambda: playsound(16))
+    o=tk.Button(window, text="o", fg='red', command=lambda: playsound(16))
     o.place(x=235, y=100)
     p=tk.Button(window, text="p", fg='blue', command=lambda: playsound(17))
     p.place(x=100, y=50)
-    ʃ=tk.Button(window, text="ʃ", fg='blue', command=lambda: playsound(18))
-    ʃ.place(x=125, y=50)
+    ʃ=tk.Button(window, text="ʃ", fg='green', command=lambda: playsound(18))
+    ʃ.place(x=50, y=150)
     d=tk.Button(window, text="d", fg='blue', command=lambda: playsound(19))
     d.place(x=150, y=50)
     g=tk.Button(window, text="g", fg='blue', command=lambda: playsound(20))
