@@ -965,6 +965,7 @@ def playsound(sound_number=0):
         N = s.parameters["N_SAMP"]
         F0 = s.parameters["F0"]
         FF = numpy.asarray(s.parameters["FF"]).T
+        BW = numpy.asarray(s.parameters["BW"]).T
         AV = s.parameters["AV"]
         AA = s.parameters['AA']
 
@@ -988,16 +989,21 @@ def playsound(sound_number=0):
         ipa_æ = numpy.r_[660,1700,2400] #/æ/
         ipa_ɛ = numpy.r_[530,1850,2500] #/e/
         ipa_ɪ = numpy.r_[400,2000,2550]
-        ipa_ɒ = numpy.r_[700,760]
-        ipa_ʊ = numpy.r_[400,1100]
-        ipa_ɔ = numpy.r_[500,700]
+        ipa_ɒ = numpy.r_[700,760,760]
+        ipa_ʊ = numpy.r_[400,1100,1100]
+        ipa_ɔ = numpy.r_[500,700,700]
         ipa_ə = numpy.r_[500,1500,2500]
         ipa_n = numpy.r_[300]
-        ipa_m = numpy.r_[200]
+        ipa_m = numpy.r_[200,0,0]
         ipa_ɛr = numpy.r_[550,1550,1900]
-        ipa_ɑ = numpy.r_[750,940]
-        ipa_s = numpy.r_[250,500]
-        ipa_o = numpy.r_[430,880]
+        ipa_ɑ = numpy.r_[750,940,940]
+        ipa_s = numpy.r_[2000,4500,7000]
+        ipa_ʃ = numpy.r_[200,2700,4000]
+        ipa_o = numpy.r_[430,880,880]
+        ipa_b = numpy.r_[300, 1000, 2000] 
+        ipa_d = numpy.r_[300, 1800, 2000] 
+        ipa_g = numpy.r_[250, 541, 1942] 
+        ipa_k = numpy.r_[240, 842, 1542] 
         if 0:  # linear transition
             xfade = numpy.linspace(1, 0, N)
         else:  # exponential transition
@@ -1036,12 +1042,12 @@ def playsound(sound_number=0):
             s.run()
             s.play()
         elif sound_number==7:
-            FF[:,:2] = ipa_ɒ
+            FF[:,:3] = ipa_ɒ
             s.parameters["FF"] = FF.T
             s.run()
             s.play()
         elif sound_number==8:
-            FF[:,:2] = ipa_ʊ
+            FF[:,:3] = ipa_ʊ
             s.parameters["FF"] = FF.T
             s.run()
             s.play()
@@ -1053,11 +1059,11 @@ def playsound(sound_number=0):
         elif sound_number==10:
             FF[:,:1] = ipa_n
             s.parameters["FF"] = FF.T
-            s.parameters["NF"] = 20
+            s.parameters["NF"] = 25
             s.run()
             s.play()
         elif sound_number==11:
-            FF[:,:1] = ipa_m
+            FF[:,:3] = ipa_m
             s.parameters["FF"] = FF.T
             s.parameters["NF"] = 20
             s.run()
@@ -1068,27 +1074,56 @@ def playsound(sound_number=0):
             s.run()
             s.play()
         elif sound_number==13:
-            FF[:,:2] = ipa_ɔ
+            FF[:,:3] = ipa_ɔ
             s.parameters["FF"] = FF.T
             s.run()
             s.play()
         elif sound_number==14:
-            FF[:,:2] = ipa_ɑ
+            FF[:,:3] = ipa_ɑ
             s.parameters["FF"] = FF.T
             s.run()
             s.play()
         elif sound_number==15:
-            FF[:,:2] = ipa_s 
+            FF[:,:3] = ipa_s 
             s.parameters["FF"] = FF.T
             s.parameters["AF"] = 100
             s.run()
             s.play()
         elif sound_number==16:
-            FF[:,:2] = ipa_o
+            FF[:,:3] = ipa_o
             s.parameters["FF"] = FF.T
             s.run()
             s.play()
-        time.sleep(0.75)
+        elif sound_number==17:
+            FF[:,:3] = numpy.outer(xfade, ipa_b) + numpy.outer((1 - xfade), ipa_u)
+            s.parameters["FF"] = FF.T
+            s.run()
+            s.play()
+        elif sound_number==18:
+            FF[:,:3] = ipa_ʃ
+            s.parameters["FF"] = FF.T 
+            s.parameters["AF"] = 100
+            s.run()
+            s.play()
+        elif sound_number==19:
+            FF[:,:3] = numpy.outer(xfade, ipa_d) + numpy.outer((1-xfade), ipa_ɑ)
+            s.parameters["FF"] = FF.T
+            s.run()
+            s.play()
+        elif sound_number==20:
+            FF[:,:3] = numpy.outer(xfade, ipa_g) + numpy.outer((1 - xfade), ipa_ɑ)
+            s.parameters["FF"] = FF.T
+            s.parameters["NF"] = 20
+            s.run()
+            s.play()
+        elif sound_number==21:
+            FF[:,:3] = numpy.outer(0.1-xfade, ipa_k)+ numpy.outer((0.9 - xfade), ipa_ɑ)
+            s.parameters["FF"] = FF.T
+            s.run()
+            s.play()
+
+
+        #time.sleep(0.75)
 #XXX: def __init__(self, FS=10000, N_FORM=5, DUR=1, F0=100, FF=[500, 1500, 2500, 3500, 4500], BW=[50, 100, 100, 200, 250], AV=60, AQSV=0, AA=0, AF=0,
                        #CS=0, FGR1=0, BGR1=100, FGZ=1500, BGZ=6000, FNP=250, BNP=100, FNZ=250, BNZ=100, BGR2=200, PF1=0, PF2=0, PF3=0, PF4=0, PF5=0, PF6=0, NF=0):
 if __name__ == '__main__':
@@ -1127,6 +1162,16 @@ if __name__ == '__main__':
     s.place(x=25, y=150)
     o=tk.Button(window, text="o", fg='blue', command=lambda: playsound(16))
     o.place(x=235, y=100)
+    p=tk.Button(window, text="p", fg='blue', command=lambda: playsound(17))
+    p.place(x=100, y=50)
+    ʃ=tk.Button(window, text="ʃ", fg='blue', command=lambda: playsound(18))
+    ʃ.place(x=125, y=50)
+    d=tk.Button(window, text="d", fg='blue', command=lambda: playsound(19))
+    d.place(x=150, y=50)
+    g=tk.Button(window, text="g", fg='blue', command=lambda: playsound(20))
+    g.place(x=175, y=50)
+    k=tk.Button(window, text="k", fg='blue', command=lambda: playsound(21))
+    k.place(x=200, y=50)
     window.title('Phonemes')
     window.geometry("300x200+10+20")
     window.mainloop()
