@@ -998,10 +998,13 @@ def playsound(sound_number=0):
         ipa_ɛr = numpy.r_[550,1550,1900]
         ipa_ɑ = numpy.r_[750,940,940]
         ipa_s = numpy.r_[2000,4500,7000]
+        ipa_z = numpy.r_[200,2200,3000]
         ipa_ʃ = numpy.r_[200,2700,4000]
+        ipa_f = numpy.r_[200,750,1250]
         ipa_o = numpy.r_[430,880,880]
         ipa_b = numpy.r_[300, 1000, 2000] 
-        ipa_d = numpy.r_[300, 1800, 2000] 
+        ipa_h = numpy.r_[100, 1800, 2500] 
+        ipa_t = numpy.r_[529, 1285, 3000] 
         ipa_g = numpy.r_[250, 541, 1942] 
         ipa_k = numpy.r_[240, 842, 1542] 
         if 0:  # linear transition
@@ -1095,7 +1098,7 @@ def playsound(sound_number=0):
             s.run()
             s.play()
         elif sound_number==17:
-            FF[:,:3] = numpy.outer(xfade, ipa_b) + numpy.outer((1 - xfade), ipa_u)
+            FF[:,:3] = numpy.outer(xfade, ipa_b) + numpy.outer((1 - xfade), ipa_i)
             s.parameters["FF"] = FF.T
             s.run()
             s.play()
@@ -1106,21 +1109,51 @@ def playsound(sound_number=0):
             s.run()
             s.play()
         elif sound_number==19:
-            FF[:,:3] = numpy.outer(xfade, ipa_d) + numpy.outer((1-xfade), ipa_ɑ)
+            FF[:,:3] = numpy.outer(xfade, ipa_h) + numpy.outer((1-xfade), ipa_i)
             s.parameters["FF"] = FF.T
+            #s.parameters["AA"] = 0
             s.run()
             s.play()
         elif sound_number==20:
-            FF[:,:3] = numpy.outer(xfade, ipa_g) + numpy.outer((1 - xfade), ipa_ɑ)
+            FF[:,:3] = numpy.outer(xfade, ipa_g) + numpy.outer((1 - xfade), ipa_i)
             s.parameters["FF"] = FF.T
             s.parameters["NF"] = 20
             s.run()
             s.play()
         elif sound_number==21:
-            FF[:,:3] = numpy.outer(0.1-xfade, ipa_k)+ numpy.outer((0.9 - xfade), ipa_ɑ)
+            FF[:,:3] = numpy.outer(0.1-xfade, ipa_k)+ numpy.outer((0.9 - xfade), ipa_i)
             s.parameters["FF"] = FF.T
             s.run()
             s.play()
+        elif sound_number==22:
+            FF[:,:3] = ipa_z
+            s.parameters["FF"] = FF.T
+            s.parameters["AF"] = 25
+            s.run()
+            s.play()
+        elif sound_number==23:
+            FF[:,:3] = numpy.outer(xfade, ipa_u)+ numpy.outer((1-xfade), ipa_i)
+            s.parameters["FF"] = FF.T
+            s.run()
+            s.play()
+        elif sound_number==24:
+            FF[:,:3] = ipa_f
+            s.parameters["FF"] = FF.T
+            s.parameters["AF"] = 50
+            s.run()
+            s.play()
+        elif sound_number==25:
+            FF[:,:3] = ipa_f
+            s.parameters["FF"] = FF.T
+            s.parameters["AF"] = 15
+            s.run()
+            s.play()
+        elif sound_number==26:
+            FF[:,:3] = numpy.outer(xfade, ipa_t) + numpy.outer((1-xfade), ipa_i)
+            s.parameters["FF"] = FF.T
+            s.run()
+            s.play()
+
 
 
         #time.sleep(0.75)
@@ -1166,14 +1199,24 @@ if __name__ == '__main__':
     p.place(x=100, y=50)
     ʃ=tk.Button(window, text="ʃ", fg='green', command=lambda: playsound(18))
     ʃ.place(x=50, y=150)
-    d=tk.Button(window, text="d", fg='blue', command=lambda: playsound(19))
-    d.place(x=150, y=50)
+    h=tk.Button(window, text="h", fg='blue', command=lambda: playsound(19))
+    h.place(x=150, y=50)
     g=tk.Button(window, text="g", fg='blue', command=lambda: playsound(20))
     g.place(x=175, y=50)
     k=tk.Button(window, text="k", fg='blue', command=lambda: playsound(21))
     k.place(x=200, y=50)
+    z=tk.Button(window, text="z", fg='black', command=lambda: playsound(22))
+    z.place(x=250, y=50)
+    w=tk.Button(window, text="w", fg='black', command=lambda: playsound(23))
+    w.place(x=275, y=50)
+    f=tk.Button(window, text="f", fg='black', command=lambda: playsound(24))
+    f.place(x=300, y=50)
+    v=tk.Button(window, text="v", fg='black', command=lambda: playsound(25))
+    v.place(x=325, y=50)
+    t=tk.Button(window, text="t", fg='black', command=lambda: playsound(26))
+    t.place(x=350, y=50)
     window.title('Phonemes')
-    window.geometry("300x200+10+20")
+    window.geometry("600x600+10+20")
     window.mainloop()
 
     
