@@ -22,6 +22,7 @@ getIpa (string):
 import requests
 import json
 import tkinter as tk
+import codecs
 
 def getIpa(word):
   #Get JSON of word input from API
@@ -53,9 +54,7 @@ def getIpa(word):
           content = content[content.find("General American"):content.find("General American")+1000]
           content = content[content.find("<span class=\\\\\"IPA\\\\\">")+22:content.find("<span class=\\\\\"IPA\\\\\">")+100]
           content = content[:content.find("</span>")]
-          encoded_symbol = '\\u00a5'
-          print (encoded_symbol)
-          print (encoded_symbol.decode('unicode_escape'))
+          convert = content[content.find("\\")+3:content.find("\\")+7]
         else:
           print('error. not found.')
 
